@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+COLORS = {
+  foreground: 'foreground',
+  background: 'background',
+  black: 'color0',
+  red: 'color1',
+  green: 'color2',
+  yellow: 'color3',
+  blue: 'color4',
+  magenta: 'color5',
+  cyan: 'color6',
+  white: 'color7'
+}.freeze
+
+COLOR_REGEX = /\*\.?(color\d+|foreground|background):.*(#[0-9a-fA-F]{6})/
+
+options = {
+  input_file: File.join(Dir.home, '.Xresources'),
+  output_file: File.join(Dir.getwd, 'generated-config')
+}
+
+color_hash = Hash.new
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: colors [options]"
+
+  opts.on('-t', '--template=file', String) { |file| options[:template] = file }
+  opts.on('-i', '--input=file', String) { |file| options[:input_file] = file }
+  opts.on('-o', '--output=file', String) { |file| options[:output_file] = file }
+end
+
+parser.parse!
+
+if options[:template].nil? || options[:template].strip == ''
+  abort 'Error: A template must be provided'
+end
+
+begin
+  File.foreach(options[:input_file]) do |line|
+    COLOR_REGEX.match(line) do |match|
+      if COLORS.values.include?(match[1])
+        color_name = COLORS.key(match[1])
+        color_hash[color_name] = match[2]
+      end
+    end
+  end
+rescue Errno::ENOENT
+  abort 'Input file does not exist.'
+end
+
+# No matches, nothing more to do
+if color_hash.size.zero?
+  puts 'There were no matches. Nothing to compile.'
+  exit
+end
+
+begin
+  template = File.read(options[:template])
+rescue Errno::ENOENT
+  abort 'Could not load template.'
+end
+
+# Replace template variables (similar to musatche)
+color_hash.each do |key, hex_value|
+  template.gsub!("{{#{key}}}", hex_value)
+end
+
+# Write the output file
+File.write(options[:output_file], template)
+
+puts 'Done!'
+puts "Your file has been saved to #{options[:output_file]}"
