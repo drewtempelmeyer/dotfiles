@@ -21,6 +21,8 @@ Plug 'tpope/vim-surround'               " Change your surroundings
 Plug 'terryma/vim-multiple-cursors'     " Multiple cursors
 Plug 'Yggdroot/indentLine'              " Indent guides
 Plug 'easymotion/vim-easymotion'        " Navigate files with ease
+Plug 'scrooloose/nerdtree'              " File tree view
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'SirVer/ultisnips'                 " Snippets engine
 Plug 'honza/vim-snippets'               " Snippets

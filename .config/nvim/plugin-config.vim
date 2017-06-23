@@ -38,6 +38,32 @@ let g:NERDCompactSexyComs = 1
 let g:NERDCommentEmptyLines = 1
 
 
+""" NERDTree
+let NERDTreeIgnore = ['node_modules', 'tmp', 'bower_components']
+" Don't want to see the extra text
+let NERDTreeMinimalUI = 1
+" Close NERDTree after reading file
+autocmd BufReadPre,FileReadPre * :NERDTreeClose
+map <silent> <leader>n :NERDTreeToggle<CR>
+" Get colors from color scheme
+let s:colors = palenight#GetColors()
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('md', 'blue', 'none', s:colors.blue.gui, 'none')
+call NERDTreeHighlightFile('yml', 'magenta', 'none', s:colors.purple.gui, 'none')
+call NERDTreeHighlightFile('json', 'yellow', 'none', s:colors.yellow.gui, 'none')
+call NERDTreeHighlightFile('html', 'blue', 'none', s:colors.blue.gui, 'none')
+call NERDTreeHighlightFile('css', 'cyan', 'none', s:colors.cyan.gui, 'none')
+call NERDTreeHighlightFile('scss', 'cyan', 'none', s:colors.cyan.gui, 'none')
+call NERDTreeHighlightFile('coffee', 'yellow', 'none', s:colors.dark_yellow.gui, 'none')
+call NERDTreeHighlightFile('js', 'yellow', 'none', s:colors.yellow.gui, 'none')
+call NERDTreeHighlightFile('rb', 'red', 'none', s:colors.red.gui, 'none')
+
+
 """ Custom Javascript configuration
 let g:javascript_plugin_jsdoc = 1    " Highlight JSDoc
 
@@ -50,7 +76,8 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
-      \   'neomake': 'Neomakelightline'
+      \   'neomake': 'Neomakelightline',
+      \   'filetype': 'MyFiletype'
       \ },
       \ }
 
@@ -85,3 +112,6 @@ function! LocationNext()
   endtry
 endfunction
 
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
