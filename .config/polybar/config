@@ -90,7 +90,7 @@ format-prefix = "  "
 format-foreground = ${colors.brown}
 
 label-foreground = ${colors.brown}
-label = "%title:0:35:..% "
+label = "%title:0:35:...% "
 label-maxlen = 75
 
 [module/wm]
