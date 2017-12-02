@@ -11,6 +11,7 @@ Plug 'vim-scripts/autoswap.vim'         " Handle swap files intelligently
 Plug 'sheerun/vim-polyglot'             " Mega language support pack
 Plug 'dracula/vim'                      " Dracular color scheme
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'tpope/vim-fugitive'               " Git wrapper
 Plug 'itchyny/lightline.vim'            " Awesome status bar
 Plug 'neomake/neomake'                  " Syntax checking

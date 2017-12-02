@@ -69,7 +69,6 @@ let g:javascript_plugin_jsdoc = 1    " Highlight JSDoc
 
 
 let g:lightline = {
-      \ 'colorscheme': 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'  ],
       \             [ 'gitbranch', 'neomake', 'readonly', 'filename', 'modified'  ] ]
