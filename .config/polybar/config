@@ -1,14 +1,8 @@
 [colors]
-background = #ee292d3e
-foreground = #bfc7d5
-yellow = #ffcb6b
-black = #073642
-white = #bfc7d5
-red = #ac4142
-green = #a9c77d
-blue = #82aaff
-magenta = #c792ea
-cyan = #89ddff
+background = #2a292a
+foreground = #c2c0c3
+white = #c2c0c3
+brown = #9b8a79
 
 [bar/master]
 width = 100%
@@ -18,17 +12,24 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 underline-size = 0
 overline-size = 0
-font-0 = "DejaVu Sans Mono:pixelsize=9:antialias=false;1"
-font-1 = "FontAwesome:pixelsize=9:antialias=false;1"
+
+font-0 = Dina:pixelsize=8;0
+font-1 = Wuncon Siji:size=9;1
 
 [bar/top]
 inherit = bar/master
-modules-left = wm
-modules-center = title
-modules-right = ovpn ram cpu temperature pavolume time
+modules-left = wm allow title
+modules-center = time
+modules-right = ovpn spotify pavolume
 
 padding-right = 1
 
+[module/allow]
+type = custom/text
+content = "|"
+content-foreground = ${colors.brown}
+
+; VPN
 [module/ovpn]
 type = internal/network
 interface = tun0
@@ -41,10 +42,26 @@ format-disconnected-padding = 1
 format-connected = <label-connected>
 
 label-connected = 
-label-connected-foreground = ${colors.cyan}
+label-connected-foreground = ${colors.brown}
 
 label-disconnected = 
-label-disconnected-foreground = ${colors.red}
+label-disconnected-foreground = ${colors.white}
+
+;spotify
+[module/spotify]
+
+type = custom/script
+tail = true
+exec = ~/.config/polybar/spotify.sh %artist% - %title%
+
+format-foreground = ${colors.white}
+
+format-prefix = ""
+fotmat-prefix-font = 1
+format-prefix-foreground = ${colors.white}
+internal = 1
+
+format-padding = 1
 
 [module/pavolume]
 type = custom/script
@@ -57,24 +74,8 @@ scroll-up = ~/.config/polybar/pavolume.sh --up
 scroll-down = ~/.config/polybar/pavolume.sh --down
 
 label = %output%
-label-foreground = ${colors.yellow}
+label-foreground = ${colors.brown}
 format-padding = 1
-
-[module/temperature]
-type = internal/temperature
-
-thermal-zone = 2
-
-format = <ramp> <label>
-format-padding = 1
-
-label-foreground = ${colors.green}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-
-ramp-foreground = ${colors.green}
 
 [module/network]
 type = internal/network
@@ -84,28 +85,13 @@ accumlate-stats = true
 
 [module/title]
 type = internal/xwindow
-label = %title%
+
+format-prefix = "  "
+format-foreground = ${colors.brown}
+
+label-foreground = ${colors.brown}
+label = "%title:0:35:..% "
 label-maxlen = 75
-
-[module/ram]
-type = internal/memory
-interval = 3
-
-label-foreground = ${colors.blue}
-label-padding = 1
-format-prefix = ""
-format-prefix-foreground = ${colors.blue}
-format-padding = 1
-
-[module/cpu]
-type = internal/cpu
-interval = 1
-
-label-foreground = ${colors.cyan}
-label-padding = 1
-format-prefix = ""
-format-prefix-foreground = ${colors.cyan}
-format-padding = 1
 
 [module/wm]
 type = internal/i3
@@ -113,15 +99,19 @@ enable-click = true
 enable-scroll = false
 strip-wsnumbers = true
 
-format-padding = 1
-label-focused-foreground = ${colors.magenta}
+format-padding = 0
+label-focused = 
+label-focused-foreground = ${colors.brown}
 label-focused-padding = 1
 
+label-unfocused = 
 label-unfocused-padding = 1
 
+label-visible = 
 label-visible-padding = 1
 
-label-urgent-foreground = ${colors.red}
+label-urgent = 
+label-urgent-foreground = ${colors.white}
 label-urgent-padding = 1
 
 [module/time]
@@ -129,6 +119,5 @@ type = internal/date
 interval = 40
 
 format-padding = 1
-label-foreground = ${colors.magenta}
 
-date = "%I:%M %p"
+date = "%b %e, %Y - %I:%M %p"
