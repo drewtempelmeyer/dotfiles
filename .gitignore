@@ -1,0 +1,4 @@
+# Ignore vim plugins
+nvim/.config/nvim/plugged
+
+.DS_Store
