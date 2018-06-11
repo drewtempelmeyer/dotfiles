@@ -1,6 +1,6 @@
-if !has('nvim')
-  set nocompatible                    " be iMproved, required
-endif
+set t_ut=
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
 " Install VimPlug if not present
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -9,6 +9,8 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 let mapleader="," " Change <leader> to ,
+
+let g:palenight_terminal_italics = 1
 
 source $HOME/.config/nvim/plugins.vim
 
@@ -22,16 +24,11 @@ endif
 " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
 if (has("termguicolors"))
   set termguicolors
-  " set Vim-specific sequences for RGB colors
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 " Colorscheme
-set background=dark
-colorscheme base16-gruvbox-dark-hard
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
+set background=dark " or light if you prefer the light version
+colorscheme palenight
 
 set mouse=a
 set cursorline                  " Highlight the current line
