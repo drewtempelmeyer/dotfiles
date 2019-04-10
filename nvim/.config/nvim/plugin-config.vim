@@ -11,7 +11,6 @@ let g:EditorConfig_core_mode = 'external_command'
 
 
 """ fzf config
-let $FZF_DEFAULT_COMMAND = 'ag -l --nocolor --hidden -g ""'
 nnoremap <silent> <leader>t :Files<CR>
 nnoremap <silent> <leader>f :Buffers<CR>
 
@@ -30,6 +29,12 @@ let g:deoplete#enable_at_startup = 1
 " Improve ultisnips and deoplete integration
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
+""" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 """ NERDCommenter
 " Add spaces after comment delimiters by default
@@ -67,6 +72,8 @@ call NERDTreeHighlightFile('rb', 'red', 'none', s:colors.red.gui, 'none')
 
 
 """ vim-test configuration
+let test#strategy = "neovim"
+
 nmap <silent> <leader>o :TestNearest<CR>
 nmap <silent> <leader>O :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
@@ -77,36 +84,12 @@ let g:lightline = {
       \ 'colorscheme': 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'  ],
-      \             [ 'gitbranch', 'neomake', 'readonly', 'filename', 'modified'  ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified'  ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'neomake': 'NeomakeLightline'
+      \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
-function! NeomakeLightline()
-  if !exists('*neomake#statusline#LoclistCounts')
-    return ''
-  endif
-
-  " Count all the errors, warnings
-  let total = 0
-
-  for v in values(neomake#statusline#LoclistCounts())
-    let total += v
-  endfor
-
-  for v in items(neomake#statusline#QflistCounts())
-    let total += v
-  endfor
-
-  if total == 0
-    return ''
-  endif
-
-  return 'line '.getloclist(0)[0].lnum. ', 1 of '.total
-endfunction
 
 function! LocationNext()
   try
