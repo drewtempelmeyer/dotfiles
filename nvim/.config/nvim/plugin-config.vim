@@ -1,6 +1,8 @@
 """ ruby config
 let ruby_operators = 1
 
+nmap <F8> :TagbarToggle<CR>
+
 
 """ Custom Javascript configuration
 let g:javascript_plugin_jsdoc = 1    " Highlight JSDoc
