@@ -26,6 +26,9 @@ let g:indentLine_char = '┆'
 nnoremap <leader>e :call LocationNext()<cr>
 
 
+""" startify config
+let g:startify_change_to_vcs_root = 1 " Change to git root instead of file dir
+
 """ deoplete configuration
 let g:deoplete#enable_at_startup = 1
 " Improve ultisnips and deoplete integration
@@ -83,7 +86,7 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'palenight',
+      \ 'colorscheme': 'nova',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'  ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified'  ] ]

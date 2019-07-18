@@ -28,7 +28,9 @@ if has('nvim') || has('termguicolors')
 endif
 
 " Colorscheme
-colorscheme palenight
+set background=dark
+let g:spring_night_high_contrast=1
+colorscheme snazzy
 
 set mouse=a
 set cursorline                  " Highlight the current line

@@ -12,6 +12,12 @@ Plug 'sheerun/vim-polyglot'             " Mega language support pack
 Plug 'drewtempelmeyer/palenight.vim'    " Fantastic colors
 Plug 'nightsense/cosmic_latte'
 Plug 'rhysd/vim-color-spring-night'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'connorholyday/vim-snazzy'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'romainl/Apprentice'
+Plug 'ntk148v/vim-horizon'
+Plug 'ruby-formatter/rufo-vim'
 Plug 'tpope/vim-fugitive'               " Git wrapper
 Plug 'itchyny/lightline.vim'            " Awesome status bar
 Plug 'neomake/neomake'                  " Syntax checking
