@@ -10,8 +10,6 @@ endif
 
 let mapleader="," " Change <leader> to ,
 
-let g:palenight_terminal_italics = 1
-
 source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/plugin-config.vim
 
@@ -29,8 +27,7 @@ endif
 
 " Colorscheme
 set background=dark
-let g:spring_night_high_contrast=1
-colorscheme snazzy
+colorscheme edge
 
 set mouse=a
 set cursorline                  " Highlight the current line

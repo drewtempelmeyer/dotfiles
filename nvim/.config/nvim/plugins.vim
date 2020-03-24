@@ -10,12 +10,9 @@ Plug 'vim-scripts/auto-pairs-gentle'    " Add brackets automatically
 Plug 'vim-scripts/autoswap.vim'         " Handle swap files intelligently
 Plug 'sheerun/vim-polyglot'             " Mega language support pack
 Plug 'drewtempelmeyer/palenight.vim'    " Fantastic colors
-Plug 'nightsense/cosmic_latte'
-Plug 'rhysd/vim-color-spring-night'
-Plug 'phanviet/vim-monokai-pro'
-Plug 'connorholyday/vim-snazzy'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'romainl/Apprentice'
+Plug 'liuchengxu/vista.vim'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'sainnhe/edge'
 Plug 'ntk148v/vim-horizon'
 Plug 'ruby-formatter/rufo-vim'
 Plug 'tpope/vim-fugitive'               " Git wrapper
@@ -24,7 +21,6 @@ Plug 'neomake/neomake'                  " Syntax checking
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'    " .editorconfig support
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Keyword completion
 Plug 'tpope/vim-surround'               " Change your surroundings
 Plug 'terryma/vim-multiple-cursors'     " Multiple cursors
 Plug 'Yggdroot/indentLine'              " Indent guides
@@ -34,10 +30,7 @@ Plug 'janko-m/vim-test'                 " Running tests
 Plug 'airblade/vim-gitgutter'           " Git gutter
 Plug 'junegunn/vim-easy-align'          " Align things
 Plug 'mhinz/vim-startify'               " Lovely, informative start screen
-Plug 'majutsushi/tagbar'
-
-Plug 'SirVer/ultisnips'                 " Snippets engine
-Plug 'honza/vim-snippets'               " Snippets
+Plug 'mattn/emmet-vim'                  " Expanding abbreviations
 
 call plug#end()
 

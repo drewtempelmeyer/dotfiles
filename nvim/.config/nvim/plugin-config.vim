@@ -1,8 +1,6 @@
 """ ruby config
 let ruby_operators = 1
 
-nmap <F8> :TagbarToggle<CR>
-
 
 """ Custom Javascript configuration
 let g:javascript_plugin_jsdoc = 1    " Highlight JSDoc
@@ -25,14 +23,15 @@ let g:indentLine_char = '┆'
 " Use <leader>e to go to the next error
 nnoremap <leader>e :call LocationNext()<cr>
 
+""" edge colorscheme
+let g:edge_style = 'neon'
+let g:edge_enable_italic = 1
+
+""" coc config
+let g:coc_node_path = '/home/drew/.nvm/versions/node/v13.3.0/bin/node'
 
 """ startify config
 let g:startify_change_to_vcs_root = 1 " Change to git root instead of file dir
-
-""" deoplete configuration
-let g:deoplete#enable_at_startup = 1
-" Improve ultisnips and deoplete integration
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 """ vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -57,23 +56,6 @@ let NERDTreeMinimalUI = 1
 " Close NERDTree after reading file
 autocmd BufReadPre,FileReadPre * :NERDTreeClose
 map <silent> <leader>n :NERDTreeToggle<CR>
-" Get colors from color scheme
-let s:colors = palenight#GetColors()
-
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-call NERDTreeHighlightFile('md', 'blue', 'none', s:colors.blue.gui, 'none')
-call NERDTreeHighlightFile('yml', 'magenta', 'none', s:colors.purple.gui, 'none')
-call NERDTreeHighlightFile('json', 'yellow', 'none', s:colors.yellow.gui, 'none')
-call NERDTreeHighlightFile('html', 'blue', 'none', s:colors.blue.gui, 'none')
-call NERDTreeHighlightFile('css', 'cyan', 'none', s:colors.cyan.gui, 'none')
-call NERDTreeHighlightFile('scss', 'cyan', 'none', s:colors.cyan.gui, 'none')
-call NERDTreeHighlightFile('coffee', 'yellow', 'none', s:colors.dark_yellow.gui, 'none')
-call NERDTreeHighlightFile('js', 'yellow', 'none', s:colors.yellow.gui, 'none')
-call NERDTreeHighlightFile('rb', 'red', 'none', s:colors.red.gui, 'none')
 
 
 """ vim-test configuration
@@ -86,15 +68,34 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'nova',
+      \ 'colorscheme': 'edge',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'  ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified'  ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method'  ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'method': 'NearestMethodOrFunction'
       \ },
       \ }
+
+" How each level is indented and what to prepend.
+" This could make the display more compact or more spacious.
+" e.g., more compact: ["▸ ", ""]
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
+" Executive used when opening vista sidebar without specifying it.
+" See all the avaliable executives via `:echo g:vista#executives`.
+let g:vista_default_executive = 'ctags'
+
+" To enable fzf's preview window set g:vista_fzf_preview.
+" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
+" For example:
+let g:vista_fzf_preview = ['right:50%']
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
 
 function! LocationNext()
   try
