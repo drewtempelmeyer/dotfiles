@@ -10,8 +10,6 @@ endif
 
 let mapleader="," " Change <leader> to ,
 
-let g:palenight_terminal_italics = 1
-
 source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/plugin-config.vim
 
@@ -28,7 +26,8 @@ if has('nvim') || has('termguicolors')
 endif
 
 " Colorscheme
-colorscheme palenight
+set background=dark
+colorscheme edge
 
 set mouse=a
 set cursorline                  " Highlight the current line
