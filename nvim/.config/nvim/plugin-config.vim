@@ -15,23 +15,13 @@ nnoremap <silent> <leader>t :Files<CR>
 nnoremap <silent> <leader>f :Buffers<CR>
 
 
-""" Indent guides
-let g:indentLine_char = '┆'
-
-
 """ neomake configuration
 " Use <leader>e to go to the next error
 nnoremap <leader>e :call LocationNext()<cr>
 
-""" edge colorscheme
-let g:edge_style = 'neon'
-let g:edge_enable_italic = 1
-
-""" coc config
-let g:coc_node_path = '/home/drew/.nvm/versions/node/v13.3.0/bin/node'
-
-""" startify config
-let g:startify_change_to_vcs_root = 1 " Change to git root instead of file dir
+""" Insert snippets on return
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
+      \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 """ vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -48,16 +38,6 @@ let g:NERDCompactSexyComs = 1
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 
-
-""" NERDTree
-let NERDTreeIgnore = ['node_modules', 'tmp', 'bower_components']
-" Don't want to see the extra text
-let NERDTreeMinimalUI = 1
-" Close NERDTree after reading file
-autocmd BufReadPre,FileReadPre * :NERDTreeClose
-map <silent> <leader>n :NERDTreeToggle<CR>
-
-
 """ vim-test configuration
 let test#strategy = "neovim"
 
@@ -67,40 +47,43 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+
+let g:lualine = {
+      \'options' : {
+        \  'theme' : 'spaceduck',
+        \  'section_separators' : ['', ''],
+        \  'component_separators' : ['', ''],
+        \  'icons_enabled' : v:true,
+        \},
+        \'sections' : {
+          \  'lualine_a' : [ ['mode', {'upper': v:true,},], ],
+          \  'lualine_b' : [ ['branch', {'icon': '',}, ], ],
+          \  'lualine_c' : [ ['filename', {'file_status': v:true,},], ],
+          \  'lualine_x' : [ 'encoding', 'fileformat', 'filetype' ],
+          \  'lualine_y' : [ 'progress' ],
+          \  'lualine_z' : [ 'location'  ],
+          \},
+          \'inactive_sections' : {
+            \  'lualine_a' : [  ],
+            \  'lualine_b' : [  ],
+            \  'lualine_c' : [ 'filename' ],
+            \  'lualine_x' : [ 'location' ],
+            \  'lualine_y' : [  ],
+            \  'lualine_z' : [  ],
+            \},
+            \'extensions' : [ 'fzf' ],
+            \}
+
+lua require("lualine").setup()
+
 let g:lightline = {
-      \ 'colorscheme': 'edge',
+      \ 'colorscheme': 'spaceduck',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste'  ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method'  ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'method': 'NearestMethodOrFunction'
-      \ },
-      \ }
-
-" How each level is indented and what to prepend.
-" This could make the display more compact or more spacious.
-" e.g., more compact: ["▸ ", ""]
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-
-" Executive used when opening vista sidebar without specifying it.
-" See all the avaliable executives via `:echo g:vista#executives`.
-let g:vista_default_executive = 'ctags'
-
-" To enable fzf's preview window set g:vista_fzf_preview.
-" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
-" For example:
-let g:vista_fzf_preview = ['right:50%']
-
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
-function! LocationNext()
-  try
-    lnext
-  catch
-    try | lfirst | catch | endtry
-  endtry
-endfunction
+        \   'left': [ [ 'mode', 'paste'  ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method'  ] ]
+        \ },
+        \ 'component_function': {
+          \   'gitbranch': 'fugitive#head',
+          \   'method': 'NearestMethodOrFunction'
+          \ },
+          \ }

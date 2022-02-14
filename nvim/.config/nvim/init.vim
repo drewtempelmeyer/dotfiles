@@ -27,10 +27,10 @@ endif
 
 " Colorscheme
 set background=dark
-colorscheme edge
+colorscheme palenight
 
 set mouse=a
-set cursorline                  " Highlight the current line
+set nocursorline                " Don't highlight the current line
 set lazyredraw                  " Faster scrolling
 set number                      " Show line number
 set relativenumber              " Show relative line number
@@ -74,12 +74,15 @@ set regexpengine=1
 
 " Filetype specific settings
 autocmd! filetype *commit*,markdown setlocal spell         " Spell Check
-autocmd! filetype *commit*,markdown setlocal textwidth=72  " Looks good
+autocmd! filetype *commit*,markdown setlocal textwidth=80  " Looks good
 autocmd! filetype make setlocal noexpandtab                " In Makefiles DO NOT use spaces instead of tabs
 
 autocmd BufWritePre * call TrimWhitespace() " Remove trailing whitespace when saving
 autocmd! BufReadPost * call SetCursorPosition()
-autocmd! BufWritePost * Neomake
+
+autocmd BufWritePost *.rb silent! execute "!ripper-tags -R --exclude=vendor >/dev/null 2>&1" | redraw!
+
+nmap <silent> <leader>r :silent execute "!rubocop -A %"<CR>
 
 set ff=unix
 
@@ -94,6 +97,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+" Organize go imports
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Trims trailing whitespace
 function! TrimWhitespace()
@@ -115,3 +121,11 @@ function! SetCursorPosition()
   endif
 endfunction
 
+:lua << EOF
+  local nvim_lsp = require('lspconfig')
+  local servers = {'solargraph'}
+  for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+    }
+  end
+EOF
