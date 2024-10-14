@@ -29,7 +29,7 @@ return {
 		keys = {
 			{
 				"<leader>xx",
-				"<cmd>Trouble preview_float toggle<cr>",
+				"<cmd>Trouble preview_float toggle focus=true<cr>",
 				desc = "Diagnostics (Trouble)",
 			},
 			{
