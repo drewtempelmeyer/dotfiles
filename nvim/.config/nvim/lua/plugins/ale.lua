@@ -18,6 +18,7 @@ return {
 			g.ale_linters = {
 				ruby = { "rubocop", "ruby" },
 				lua = { "lua_language_server" },
+				go = {"gopls"},
 			}
 		end,
 	},

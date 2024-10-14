@@ -1,8 +1,7 @@
 return {
 	{
 		"fatih/vim-go",
-		ft = "go",
-		cmd = "GoUpdateBinaries",
+		build = ":GoUpdateBinaries",
 		init = function()
 			-- Go config
 			-- disable all linters as that is taken care of by coc.nvim
@@ -27,6 +26,9 @@ return {
 			vim.g.go_highlight_extra_types = 1
 			vim.g.go_highlight_build_constraints = 1
 			vim.g.go_highlight_generate_tags = 1
+
+			vim.g.go_def_mode = "gopls"
+			vim.g.go_info_mode = "gopls"
 		end,
 	},
 }

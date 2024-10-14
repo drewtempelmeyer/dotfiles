@@ -1,40 +1,42 @@
 -- Relative line numbers
-vim.opt.rnu = true
+vim.o.rnu = true
 
-vim.opt.termguicolors = true
+-- Show tabs and spaces
+vim.o.list = true -- Don't display hidden chars as defined below
+vim.o.listchars = "tab:>.,trail:.,extends:#,nbsp:."
+
+vim.o.termguicolors = true
 
 -- Colorscheme
-vim.opt.background = dark
+vim.o.background = dark
 
-vim.opt.cursorline = false -- Don't highlight the current line
-vim.opt.lazyredraw = true -- Faster scrolling
-vim.opt.number = true -- Show line number
-vim.opt.relativenumber = true -- Show relative line number
-vim.opt.showcmd = true -- Show current command
-vim.opt.showmode = true -- Show current mode
-vim.opt.wildmode = "longest:list,full" -- Autocomplete
-vim.opt.wildignore = "*.o,*.obj,*~" -- Ignore file
-vim.opt.showmatch = true -- highlight matching braces
-vim.opt.hlsearch = true -- Highlight search
-vim.opt.ignorecase = true -- ignore case while searching
-vim.opt.smartcase = true -- unless uppercase explicitly mentioned
-vim.opt.smartindent = true -- indent smartly
-vim.opt.wrap = false -- Don't wrap text
--- vim.opt.laststatus = 2 -- Always show statusbar
-vim.opt.scrolloff = 5 -- Minimum space on bottom/top of window
-vim.opt.sidescrolloff = 7 -- Minimum space on side
-vim.opt.sidescroll = 1
-vim.opt.list = false -- Don't display hidden chars as defined below
-vim.opt.listchars = "tab:▷⋅,trail:⋅,nbsp:+,extends:»,precedes:«"
-vim.opt.splitright = true -- Open vsp on right
-vim.opt.showmode = false -- Hide mode (lightline shows mode)
-vim.opt.foldenable = false -- Disable folding
-vim.opt.clipboard:append({ "unnamed", "unnamedplus" }) -- Use system clipboard
+vim.o.cursorline = false -- Don't highlight the current line
+vim.o.lazyredraw = true -- Faster scrolling
+vim.o.number = true -- Show line number
+vim.o.relativenumber = true -- Show relative line number
+vim.o.showcmd = true -- Show current command
+vim.o.showmode = true -- Show current mode
+vim.o.wildmode = "longest:list,full" -- Autocomplete
+vim.o.wildignore = "*.o,*.obj,*~" -- Ignore file
+vim.o.showmatch = true -- highlight matching braces
+vim.o.hlsearch = true -- Highlight search
+vim.o.ignorecase = true -- ignore case while searching
+vim.o.smartcase = true -- unless uppercase explicitly mentioned
+vim.o.smartindent = true -- indent smartly
+vim.o.wrap = false -- Don't wrap text
+-- vim.o.laststatus = 2 -- Always show statusbar
+vim.o.scrolloff = 5 -- Minimum space on bottom/top of window
+vim.o.sidescrolloff = 7 -- Minimum space on side
+vim.o.sidescroll = 1
+vim.o.splitright = true -- Open vsp on right
+vim.o.showmode = false -- Hide mode (lightline shows mode)
+vim.o.foldenable = false -- Disable folding
+vim.o.clipboard = "unnamedplus" -- Use system clipboard
 
 -- Undo settings
-vim.opt.undofile = true
-vim.opt.undolevels = 1000 -- max number of changes that can be undone
-vim.opt.undoreload = 10000 -- max number lines to save for undo on buffer reload
+vim.o.undofile = true
+vim.o.undolevels = 1000 -- max number of changes that can be undone
+vim.o.undoreload = 10000 -- max number lines to save for undo on buffer reload
 
 -- Open Telescope on start
 vim.api.nvim_create_autocmd("VimEnter", {

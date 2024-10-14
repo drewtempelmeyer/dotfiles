@@ -9,7 +9,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				ruby = { "rubocop" },
-				go = { "goimports" },
+				go = { "goimports", "golines" },
 			},
 		},
 		init = function()

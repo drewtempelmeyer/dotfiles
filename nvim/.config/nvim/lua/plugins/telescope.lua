@@ -9,14 +9,15 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local builtin = require("telescope.builtin")
+
+			require("telescope").load_extension("fzf")
+
 			vim.keymap.set("n", "<C-P>", builtin.find_files, {
 				desc = "Telescope find files",
 			})
 
 			vim.keymap.set("n", "<leader>t", builtin.live_grep, { desc = "Telescope live grep" })
 			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Telescope buffer" })
-
-			require("telescope").load_extension("fzf")
 		end,
 		opts = {
 			extensions = {

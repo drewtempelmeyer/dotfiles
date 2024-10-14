@@ -22,15 +22,55 @@ return {
 		init = function()
 			vim.g.coq_settings = {
 				auto_start = true, -- if you want to start COQ at startup
-				-- Your COQ settings here
+				keymap = {
+					recommended = true,
+					jump_to_mark = "<C-f>",
+				},
+				display = {
+					statusline = {
+						helo = false,
+					},
+				},
 			}
 		end,
 		config = function()
+			local masonlsp = require("mason-lspconfig")
+			local lsp = require("lspconfig")
+			local coq = require("coq")
+
 			require("mason").setup()
-			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "gopls", "ruby_lsp", "ruff", "eslint", "harper_ls", "emmet_ls" },
+
+			local handlers = {
+				function(server_name)
+					lsp[server_name].setup(coq.lsp_ensure_capabilities({}))
+				end,
+			}
+
+			masonlsp.setup({
+				ensure_installed = {
+					"lua_ls",
+					"gopls",
+					"ruby_lsp",
+					"ruff",
+					"eslint",
+					"harper_ls",
+					"emmet_ls",
+					"html",
+					"htmx",
+					"templ",
+					"omnisharp",
+				},
 				automatic_installation = true,
+				handlers = handlers,
 			})
+
+			lsp.html.setup(coq.lsp_ensure_capabilities({
+				filetypes = { "html", "templ" },
+			}))
+
+			lsp.htmx.setup(coq.lsp_ensure_capabilities({
+				filetypes = { "html", "templ" },
+			}))
 		end,
 	},
 }
