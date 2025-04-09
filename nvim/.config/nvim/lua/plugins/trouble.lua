@@ -2,25 +2,15 @@ return {
 	{
 		"folke/trouble.nvim",
 		opts = {
-			win = {
-				type = "float",
-			},
 			modes = {
-				preview_float = {
+				diag = {
 					mode = "diagnostics",
-					filter = { buf = 0 }, -- limit to current buffer
+					filter = { buf = 0 },
 					preview = {
-						type = "float",
-						relative = "editor",
-						border = "rounded",
-						title = "Preview",
-						title_pos = "center",
-						position = { 0, -2 },
-						size = {
-							width = 0.3,
-							height = 0.3,
-						},
-						zindex = 200,
+						type = "split",
+						relative = "win",
+						position = "right",
+						size = 0.3,
 					},
 				},
 			},
@@ -29,7 +19,7 @@ return {
 		keys = {
 			{
 				"<leader>xx",
-				"<cmd>Trouble preview_float toggle focus=true<cr>",
+				"<cmd>Trouble diag toggle focus=true<cr>",
 				desc = "Diagnostics (Trouble)",
 			},
 			{

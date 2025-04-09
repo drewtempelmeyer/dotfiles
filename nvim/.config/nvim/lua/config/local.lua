@@ -3,7 +3,9 @@ vim.o.rnu = true
 
 -- Show tabs and spaces
 vim.o.list = true -- Don't display hidden chars as defined below
-vim.o.listchars = "tab:>.,trail:.,extends:#,nbsp:."
+vim.o.listchars = "tab:» ,extends:›,precedes:‹,nbsp:·,trail:·"
+vim.o.expandtab = true
+vim.o.tabstop = 4
 
 vim.o.termguicolors = true
 
